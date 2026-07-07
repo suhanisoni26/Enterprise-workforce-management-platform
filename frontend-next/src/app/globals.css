@@ -1,0 +1,131 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-mono);
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  
+  --accents-1: #fafafa;
+  --accents-2: #eaeaea;
+  --accents-3: #999999;
+  --accents-4: #888888;
+  --accents-5: #666666;
+  --accents-6: #444444;
+  --accents-7: #333333;
+  --accents-8: #111111;
+
+  --success: #0070f3;
+  --success-light: #3291ff;
+  --error: #e00;
+  --error-light: #ff1a1a;
+  --warning: #f5a623;
+  --warning-light: #f7b955;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Vercel-like Utility Classes */
+.card {
+  background: #ffffff;
+  border: 1px solid var(--accents-2);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  border-color: var(--accents-3);
+}
+
+.btn-primary {
+  background: var(--foreground);
+  color: var(--background);
+  border: 1px solid var(--foreground);
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+}
+.btn-primary:hover {
+  background: transparent;
+  color: var(--foreground);
+}
+
+.btn-secondary {
+  background: var(--background);
+  color: var(--accents-5);
+  border: 1px solid var(--accents-2);
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+}
+.btn-secondary:hover {
+  border-color: var(--foreground);
+  color: var(--foreground);
+}
+
+.input-field {
+  width: 100%;
+  background: var(--background);
+  border: 1px solid var(--accents-2);
+  color: var(--foreground);
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  transition: border-color 0.2s ease;
+  outline: none;
+}
+.input-field:focus {
+  border-color: var(--foreground);
+}
+
+.label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: var(--accents-5);
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
+  display: block;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  background: var(--accents-1);
+  color: var(--accents-5);
+  border: 1px solid var(--accents-2);
+}
+.badge-success {
+  background: rgba(0, 112, 243, 0.1);
+  color: var(--success);
+  border-color: rgba(0, 112, 243, 0.2);
+}
+.badge-error {
+  background: rgba(224, 0, 0, 0.1);
+  color: var(--error);
+  border-color: rgba(224, 0, 0, 0.2);
+}
+
+.stat-number {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--foreground);
+}
