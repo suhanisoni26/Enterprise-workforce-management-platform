@@ -341,6 +341,10 @@ export default function DashboardLayout({ children }) {
       <main className="flex-1 w-full max-w-6xl mx-auto p-4 sm:p-6 lg:p-8">
         {children}
       </main>
+      
+      <footer className="w-full text-center py-6 text-[10px] font-bold text-gray-400/80 tracking-widest uppercase border-t border-gray-200/60 bg-white">
+        MADE BY SUHANI SONI & MOHIT YADAV
+      </footer>
     </div>
   );
 }

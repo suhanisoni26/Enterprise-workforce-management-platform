@@ -389,7 +389,10 @@ export default function LoginPage() {
 
         {/* Right Footer */}
         <div className="p-8 flex justify-between items-center w-full">
-          <p className="text-[10px] text-gray-400">© 2026 Nexora, Inc.</p>
+          <div className="flex flex-col gap-1">
+            <p className="text-[10px] text-gray-400">© 2026 Nexora, Inc.</p>
+            <p className="text-[10px] font-bold tracking-widest text-indigo-400/80 uppercase">MADE BY SUHANI SONI & MOHIT YADAV</p>
+          </div>
           <div className="flex items-center gap-1.5">
             <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
             <span className="text-[10px] text-gray-400 font-medium">All systems operational</span>
