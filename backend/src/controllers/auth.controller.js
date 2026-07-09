@@ -6,6 +6,11 @@
 
 const authService = require('../services/auth.service');
 const { sendSuccess, sendError } = require('../utils/response.util');
+const User = require('../models/User.model');
+const Employee = require('../models/Employee.model');
+const Department = require('../models/Department.model');
+const { hashPassword } = require('../utils/password.util');
+const { ROLES } = require('../constants/roles.constants');
 
 /**
  * POST /api/auth/login
@@ -146,6 +151,60 @@ const register = async (req, res, next) => {
   }
 };
 
+/**
+ * GET /api/auth/seed-cloud
+ * Temporary endpoint to seed the cloud database because of ISP DNS issues.
+ */
+const seedCloud = async (req, res, next) => {
+  try {
+    const departments = [
+      { departmentCode: 'HR', departmentName: 'Human Resources', description: 'HR and People Operations' },
+      { departmentCode: 'ENG', departmentName: 'Engineering', description: 'Software Development & IT' },
+    ];
+    for (const dept of departments) {
+      if (!(await Department.findOne({ departmentCode: dept.departmentCode }))) {
+        await Department.create(dept);
+      }
+    }
+
+    const demoUsers = [
+      { role: ROLES.SUPER_ADMIN, email: 'superadmin@ewm.edu', firstName: 'Super', lastName: 'Admin', empId: 'EMP-1001' },
+      { role: ROLES.HR_MANAGER, email: 'hr@ewm.edu', firstName: 'HR', lastName: 'Manager', empId: 'EMP-1003' },
+      { role: ROLES.TEAM_LEAD, email: 'teamlead@ewm.edu', firstName: 'Team', lastName: 'Lead', empId: 'EMP-1005' },
+    ];
+
+    const defaultPassword = 'DemoPass@123';
+    const hashedDemoPass = await hashPassword(defaultPassword);
+
+    for (const u of demoUsers) {
+      if (!(await User.findOne({ email: u.email }))) {
+        await Employee.create({
+          employeeId: u.empId,
+          firstName: u.firstName,
+          lastName: u.lastName,
+          email: u.email,
+          designation: u.role.replace('_', ' '),
+          employmentType: 'full_time',
+          salary: 100000,
+          joiningDate: new Date(),
+        });
+        await User.create({
+          employeeId: u.empId,
+          email: u.email,
+          password: hashedDemoPass,
+          role: u.role,
+          isActive: true,
+          mustChangePassword: false,
+          isFirstLogin: false,
+        });
+      }
+    }
+    return sendSuccess(res, null, 'Cloud database seeded successfully!', 200);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   login,
   register,
@@ -156,4 +215,5 @@ module.exports = {
   resetPassword,
   logout,
   getProfile,
+  seedCloud,
 };

@@ -28,6 +28,9 @@ const {
 // Public Routes (No authentication required)
 // ──────────────────────────────────────────────
 
+// GET /api/auth/seed-cloud
+router.get('/seed-cloud', authController.seedCloud);
+
 // POST /api/auth/login
 router.post('/login', authLimiter, validateLogin, authController.login);
 
